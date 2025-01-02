@@ -63,8 +63,8 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
       <Image
         source={item.profileUrl}
         style={{
-          height: hp(6),
-          width: wp(7.5),
+          height: "50px",
+          width: "50px",
           borderRadius: 100,
         }}
         placeholder={blurhash}
