@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Pressable,
   Alert,
+  TextInput,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import {
@@ -13,7 +14,6 @@ import {
 } from "react-native-responsive-screen";
 import { StatusBar } from "expo-status-bar";
 import { Octicons } from "@expo/vector-icons";
-import { TextInput } from "react-native-web";
 import { useRouter } from "expo-router";
 import Loader from "../components/Loader";
 import CustomKeyBoardView from "../components/CustomKeyBoardView";
@@ -31,7 +31,6 @@ export default function SignIn() {
   const handleLogin = async () => {
     if (!mailRef.current || !passwordRef.current) {
       Alert.alert("SignIn", "Please fill all the fields");
-      alert("Please fill all the fields");
       return;
     }
     setLoading(true);
@@ -39,7 +38,6 @@ export default function SignIn() {
     setLoading(false);
     if (!response.success) {
       Alert.alert("SignIn", response.msg);
-      alert(response.msg);
     }
   };
 
@@ -47,7 +45,7 @@ export default function SignIn() {
     <CustomKeyBoardView>
       <StatusBar style="dark" />
       <View
-        style={{ paddingTop: hp(8), paddingHorizontal: wp(5) }}
+        style={{ paddingTop: hp(8), paddingHorizontal: wp(5), height: "100%" }}
         className="flex-1 gap-12"
       >
         <View className="items-center">
@@ -129,7 +127,7 @@ export default function SignIn() {
               >
                 Don't have an account?
               </Text>
-              <Pressable onPress={() => router.push("signUp")}>
+              <Pressable onPress={() => router.push("SignUp")}>
                 <Text
                   style={{ height: hp(1.8), color: "#800080" }}
                   className="font-bold text-neutral-500"

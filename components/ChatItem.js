@@ -19,7 +19,7 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
   const [lastMsg, setLastmsg] = useState(undefined);
 
   const openChatRoom = () => {
-    router.push({ pathname: "/chatRoom", params: item });
+    router.push({ pathname: "/ChatRoom", params: item });
   };
 
   const renderTime = () => {
@@ -63,8 +63,8 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
       <Image
         source={item.profileUrl}
         style={{
-          height: "50px",
-          width: "50px",
+          height: hp(6),
+          width: hp(6),
           borderRadius: 100,
         }}
         placeholder={blurhash}
