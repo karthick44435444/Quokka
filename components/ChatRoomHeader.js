@@ -7,6 +7,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { Image } from "expo-image";
+import { blurhash } from "../utils/commom";
 
 export default function ChatRoomHeader({ user, router }) {
   return (
@@ -22,8 +23,10 @@ export default function ChatRoomHeader({ user, router }) {
               </TouchableOpacity>
               <View className="flex-row items-center gap-5">
                 <Image
-                  style={{ height: hp(6), width: wp(6), borderRadius: 100 }}
+                  style={{ height: hp(6), width: hp(6), borderRadius: 100 }}
                   source={user?.profileUrl}
+                  placeholder={blurhash}
+                  transition={500}
                 />
                 <Text
                   style={{ fontSize: hp(2.5) }}

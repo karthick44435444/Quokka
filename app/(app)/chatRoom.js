@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Alert,
   Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -108,40 +109,42 @@ export default function ChatRoom() {
   }, [user?.userId, item?.userId]);
 
   return (
-    <CustomKeyBoardView inChat={true}>
-      <View className="flex-1 bg-white">
-        <StatusBar style="dark" />
-        <ChatRoomHeader user={item} router={router} />
-        <View className="h-3 border-b border-neutral-300" />
-        <View className="flex-1 bg-neutral-100 justify-between overflow-visible">
-          <View className="flex-1">
-            <MessagesList
-              messages={messages}
-              currectUser={user}
-              scrollViewRef={scrollViewRef}
-            />
-          </View>
-          <View className="pt-2" style={{ marginBottom: hp(1.7) }}>
-            <View className="flex-row justify-between items-center mx-3">
-              <View className="flex-row justify-between bg-white p-2 border-neutral-300 rounded-full pl-5 w-full">
-                <TextInput
-                  ref={inputRef}
-                  onChangeText={(value) => (textRef.current = value)}
-                  placeholder="message..."
-                  className="flex-1 mr-2"
-                  style={{ fontSize: hp(2) }}
-                />
-                <TouchableOpacity
-                  onPress={handleSendMsg}
-                  className="bg-neutral-200 p-2 mr-[1px] rounded-full"
-                >
-                  <Feather name="send" size={hp(2.7)} color="#737373" />
-                </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <CustomKeyBoardView inChat={true}>
+        <View className="flex-1 bg-white">
+          <StatusBar style="dark" />
+          <ChatRoomHeader user={item} router={router} />
+          <View className="h-3 border-b border-neutral-300" />
+          <View className="flex-1 bg-neutral-100 justify-between overflow-visible">
+            <View className="flex-1">
+              <MessagesList
+                messages={messages}
+                currectUser={user}
+                scrollViewRef={scrollViewRef}
+              />
+            </View>
+            <View className="pt-2" style={{ marginBottom: hp(1.7) }}>
+              <View className="flex-row justify-between items-center mx-3">
+                <View className="flex-row justify-between bg-white p-2 border-neutral-300 rounded-full pl-5 w-full">
+                  <TextInput
+                    ref={inputRef}
+                    onChangeText={(value) => (textRef.current = value)}
+                    placeholder="message..."
+                    className="flex-1 mr-2"
+                    style={{ fontSize: hp(2) }}
+                  />
+                  <TouchableOpacity
+                    onPress={handleSendMsg}
+                    className="bg-neutral-200 p-2 mr-[1px] rounded-full"
+                  >
+                    <Feather name="send" size={hp(2.7)} color="#737373" />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
-    </CustomKeyBoardView>
+      </CustomKeyBoardView>
+    </TouchableWithoutFeedback>
   );
 }
