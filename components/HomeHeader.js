@@ -16,18 +16,21 @@ import {
 } from "react-native-popup-menu";
 import { MenuItems } from "./CustomMenuItems";
 import { AntDesign, Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 const ios = Platform.OS == "ios";
 export default function HomeHeader({ name }) {
   const { user, logout } = useAuth();
-
+  const router = useRouter();
   const { top } = useSafeAreaInsets();
 
   const Divider = () => {
     return <View className="p-[1px] w-full bg-neutral-200" />;
   };
 
-  const handleProfile = () => {};
+  const handleProfile = () => {
+    router.push("/profile");
+  };
   const handleLogout = async () => {
     await logout();
   };

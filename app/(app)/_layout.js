@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import HomeHeader from "../../components/HomeHeader";
-import { Ionicons } from "@expo/vector-icons";
+import { Icon } from "@iconify/react";
 
 export default function _layout() {
   return (
@@ -10,13 +10,21 @@ export default function _layout() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === "home")
-            iconName = focused ? "home" : "home-outline";
+            iconName = focused
+              ? "material-symbols:home-rounded"
+              : "material-symbols:home-outline-rounded";
           if (route.name === "chat")
-            iconName = focused ? "chatbubble-ellipses" : "chatbubble-outline";
+            iconName = focused
+              ? "fluent:chat-16-filled"
+              : "fluent:chat-16-regular";
           if (route.name === "friends")
-            iconName = focused ? "people" : "people-outline";
+            iconName = focused
+              ? "fluent:people-16-filled"
+              : "fluent:people-16-regular";
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return (
+            <Icon icon={iconName} width={size} height={size} color={color} />
+          );
         },
         tabBarActiveTintColor: "#7e149f",
         tabBarInactiveTintColor: "gray",

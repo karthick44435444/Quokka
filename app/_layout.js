@@ -1,6 +1,5 @@
 import { Slot, useRouter, useSegments } from "expo-router";
 import "../global.css";
-import { View } from "react-native";
 import { AuthContextProvider, useAuth } from "../context/authContext";
 import { useEffect } from "react";
 import { MenuProvider } from "react-native-popup-menu";

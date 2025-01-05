@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
