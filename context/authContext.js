@@ -29,17 +29,20 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   const updateUserData = async (userId) => {
-    const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      let data = docSnap.data();
-      setUser({
-        ...user,
-        username: data.username,
-        profileUrl: data.profileUrl,
-        userId: data.userId,
-      });
+    try {
+      const docRef = doc(db, "users", userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setUser((prevUser) => ({
+          ...prevUser,
+          username: data.username,
+          profileUrl: data.profileUrl,
+          userId: data.userId,
+        }));
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
     }
   };
 

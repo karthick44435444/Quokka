@@ -18,7 +18,7 @@ import { MenuItems } from "./CustomMenuItems";
 import { AntDesign, Feather } from "@expo/vector-icons";
 
 const ios = Platform.OS == "ios";
-export default function HomeHeader() {
+export default function HomeHeader({ name }) {
   const { user, logout } = useAuth();
 
   const { top } = useSafeAreaInsets();
@@ -38,7 +38,7 @@ export default function HomeHeader() {
     >
       <View>
         <Text style={{ fontSize: hp(3) }} className="font-medium text-white">
-          Chats
+          {name}
         </Text>
       </View>
       <View>

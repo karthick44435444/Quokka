@@ -9,16 +9,16 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import ChatRoomHeader from "../../components/ChatRoomHeader";
-import MessagesList from "../../components/MessagesList";
+import MessagesList from "../components/MessagesList";
+import ChatRoomHeader from "../components/ChatRoomHeader";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { Feather } from "@expo/vector-icons";
-import CustomKeyBoardView from "../../components/CustomKeyBoardView";
-import { useAuth } from "../../context/authContext";
-import { getRoomId } from "../../utils/commom";
+import CustomKeyBoardView from "../components/CustomKeyBoardView";
+import { useAuth } from "../context/authContext";
+import { getRoomId } from "../utils/commom";
 import {
   addDoc,
   collection,
@@ -29,7 +29,7 @@ import {
   setDoc,
   Timestamp,
 } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { db } from "../firebaseConfig";
 
 export default function ChatRoom() {
   const { user } = useAuth();
@@ -113,7 +113,12 @@ export default function ChatRoom() {
       <CustomKeyBoardView inChat={true}>
         <View className="flex-1 bg-white">
           <StatusBar style="dark" />
-          <ChatRoomHeader user={item} router={router} />
+          <View className="h-5" />
+          <ChatRoomHeader
+            user={item}
+            router={router}
+            component={item.component}
+          />
           <View className="h-3 border-b border-neutral-300" />
           <View className="flex-1 bg-neutral-100 justify-between overflow-visible">
             <View className="flex-1">

@@ -33,7 +33,7 @@ export default function Home() {
     <View className="flex-1 bg-white">
       <StatusBar style="light" />
       {users?.length > 0 ? (
-        <ChatList users={users} currentUser={user} />
+        <ChatList users={users} currentUser={user} component={"home"} />
       ) : (
         <View className="flex items-center" style={{ top: hp(30) }}>
           <Loader size={hp(20)} />
