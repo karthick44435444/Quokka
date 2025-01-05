@@ -152,14 +152,14 @@ export default function SignUp() {
             </View>
             <View className="flex-row justify-center">
               <Text
-                style={{ height: hp(2.1) }}
+                style={{ height: hp(2.5) }}
                 className="font-semibold text-neutral-500"
               >
                 Already have an account?
               </Text>{" "}
               <Pressable onPress={() => router.push("SignIn")}>
                 <Text
-                  style={{ height: hp(2.1), color: "#800080" }}
+                  style={{ height: hp(2.5), color: "#800080" }}
                   className="font-bold text-neutral-500"
                 >
                   SignIn

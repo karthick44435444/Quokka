@@ -20,7 +20,7 @@ export default function Profile() {
 
   return (
     <View className="flex-1 bg-white">
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <ProfileHeader />
       <View className="flex-1 items-center justify-center bg-white">
         <Image
@@ -28,7 +28,7 @@ export default function Profile() {
             height: hp(30),
             width: hp(30),
             borderRadius: 25,
-            marginBottom: "10px",
+            marginBottom: 10,
           }}
           source={user?.profileUrl}
           placeholder={{ blurhash }}
@@ -36,19 +36,29 @@ export default function Profile() {
         />
         <Text
           className="px-2 text-neutral-800 font-medium"
-          style={{ fontSize: "25px", margin: "20px 0", fontWeight: 500 }}
+          style={{
+            fontSize: 25,
+            marginTop: 20,
+            marginBottom: 10,
+            fontWeight: 500,
+          }}
         >
           {user?.username}
         </Text>
         <Text
           className="px-2 text-neutral-500 font-medium"
-          style={{ fontSize: "20px", margin: "10px 0", fontWeight: 500 }}
+          style={{
+            fontSize: 20,
+            marginTop: 10,
+            marginBottom: 10,
+            fontWeight: 500,
+          }}
         >
-          <b>Email : </b>
+          <Text style={{ fontWeight: "bold" }}>Email : </Text>
           {user?.email}
         </Text>
       </View>
-      <View style={{ padding: "20px" }}>
+      <View style={{ padding: 20 }}>
         <TouchableOpacity
           onPress={handleLogout}
           className="bg-neutral-200 p-2 rounded-full"
@@ -56,7 +66,7 @@ export default function Profile() {
           <Text
             style={{
               textAlign: "center",
-              fontSize: "18px",
+              fontSize: 18,
               fontWeight: 500,
               color: "#800080",
             }}

@@ -26,9 +26,9 @@ export default function ProfileHeader() {
         style={{
           color: "#fff",
           alignSelf: "center",
-          fontSize: "18px",
+          fontSize: 18,
           fontWeight: 500,
-          marginLeft: "15px",
+          marginLeft: 15,
         }}
       >
         Profile
