@@ -33,8 +33,6 @@ export default function Home() {
         <Image
           style={{ height: hp(40), aspectRatio: 1, width: hp(40) }}
           source={logo}
-          placeholder={{ blurhash }}
-          transition={500}
         />
         <Text
           style={{ fontSize: 20, fontWeight: "600" }}
