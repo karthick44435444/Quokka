@@ -16,6 +16,8 @@ import {
   query,
   where,
   doc,
+  updateDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { usersRef, db } from "../../firebaseConfig";
 import { getRoomId } from "../../utils/commom";
@@ -61,9 +63,18 @@ export default function Chat() {
     setIsLoading(false);
   };
 
+  // This function should be called whenever the user interacts with the app
+  const updateLastSeen = async (userId) => {
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, {
+      lastSeen: serverTimestamp(), // This will set the current server timestamp
+    });
+  };
+
   useEffect(() => {
     if (user?.uid) {
       getUsers();
+      updateLastSeen(user?.uid);
     }
   }, [user]);
 

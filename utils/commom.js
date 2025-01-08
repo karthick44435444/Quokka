@@ -58,3 +58,29 @@ export const formatEpoch = (epoch) => {
   // Otherwise, return formatted date (Month and Date)
   return `${monthNames[date.getMonth()]} ${date.getDate()}`;
 };
+
+export const getRelativeTime = (lastSeenTimestamp) => {
+  const now = new Date();
+  const lastSeenDate = new Date(lastSeenTimestamp.seconds * 1000); // Convert Firebase timestamp to JavaScript Date
+
+  const diffInSeconds = Math.floor((now - lastSeenDate) / 1000);
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  const diffInHours = Math.floor(diffInMinutes / 60);
+
+  if (diffInMinutes < 1) {
+    return "Active Now";
+  } else if (diffInMinutes < 60) {
+    return `${diffInMinutes}m ago`;
+  } else if (diffInHours < 24) {
+    return `${diffInHours}hr ago`;
+  } else {
+    // Format time as h:mm AM/PM
+    const hours = lastSeenDate.getHours();
+    const minutes = lastSeenDate.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const formattedHours = hours % 12 || 12; // Convert 24-hour time to 12-hour format
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero to minutes if needed
+
+    return `${formattedHours}:${formattedMinutes} ${ampm}`;
+  }
+};

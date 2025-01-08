@@ -29,12 +29,24 @@ export default function ChatRoomHeader({ user, router, component }) {
             placeholder={blurhash}
             transition={500}
           />
-          <Text
-            style={{ fontSize: hp(2.5) }}
-            className="text-neutral-700 font-medium capitalize"
-          >
-            {user?.username}
-          </Text>
+          <View className="flex">
+            <Text
+              style={{ fontSize: hp(2.5) }}
+              className="text-neutral-700 font-medium capitalize"
+            >
+              {user?.username}
+            </Text>
+            <Text
+              style={{ fontSize: hp(1.4) }}
+              className="text-neutral-500 font-medium"
+            >
+              {user?.lastSeen === "Active Now" ? (
+                <Text style={{ color: "#22C323" }}>Active Now</Text>
+              ) : (
+                `last seen at ${user?.lastSeen}`
+              )}
+            </Text>
+          </View>
         </TouchableOpacity>
       </View>
       <View className="flex-row items-center gap-8 mr-4">
