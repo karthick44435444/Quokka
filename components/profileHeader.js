@@ -10,7 +10,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ios = Platform.OS == "ios";
 
-export default function ProfileHeader() {
+export default function ProfileHeader({ title }) {
   const router = useRouter();
   const { top } = useSafeAreaInsets();
 
@@ -31,7 +31,7 @@ export default function ProfileHeader() {
           marginLeft: 15,
         }}
       >
-        Profile
+        {title ? title : Profile}
       </Text>
     </View>
   );
