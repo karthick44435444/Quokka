@@ -15,12 +15,9 @@ export default function CustomKeyBoardView({ children, inChat }) {
     keyConfig = { keyboardVerticalOffset: 90 };
     scrollViewConfig = { contentContainerStyle: { flex: 1 } };
   }
+
   return (
-    <KeyboardAvoidingView
-      behavior={ios ? "padding" : "height"}
-      style={{ flex: 1 }}
-      {...keyConfig}
-    >
+    <View style={{ flex: 1 }}>
       <ScrollView
         style={{ flex: 1 }}
         bounces={false}
@@ -29,6 +26,21 @@ export default function CustomKeyBoardView({ children, inChat }) {
       >
         {children}
       </ScrollView>
-    </KeyboardAvoidingView>
+      {inChat && (
+        <KeyboardAvoidingView
+          behavior={ios ? "height" : "height"} // "height" to reduce extra space
+          style={{
+            position: "absolute", // Keep the input area at the bottom
+            bottom: 0,
+            left: 0,
+            right: 0,
+            paddingBottom: Platform.OS === "ios" ? 15 : 10, // Adjust padding for iOS
+            zIndex: 1,
+          }}
+        >
+          {/* Your input area and send button */}
+        </KeyboardAvoidingView>
+      )}
+    </View>
   );
 }

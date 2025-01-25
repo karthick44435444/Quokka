@@ -3,6 +3,7 @@ import "../global.css";
 import { AuthContextProvider, useAuth } from "../context/authContext";
 import { useEffect } from "react";
 import { MenuProvider } from "react-native-popup-menu";
+import "react-native-gesture-handler";
 
 const MainLayout = () => {
   const { isAuthenticated } = useAuth();

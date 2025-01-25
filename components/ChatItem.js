@@ -17,6 +17,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
@@ -24,8 +25,18 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
   const [lastMsg, setLastmsg] = useState(undefined);
   const [lastSeen, setLastSeen] = useState(null);
 
-  const openChatRoom = () => {
+  const openChatRoom = async () => {
     router.push({ pathname: "/ChatRoom", params: { ...item, lastSeen } });
+
+    // Mark the last message as seen if it's not seen yet
+    if (lastMsg && !lastMsg.seen && lastMsg.userId !== currentUser?.userId) {
+      const roomId = getRoomId(currentUser?.userId, item?.userId);
+      const docRef = doc(db, "rooms", roomId, "messages", lastMsg.id);
+
+      await updateDoc(docRef, {
+        seen: true,
+      });
+    }
   };
 
   const renderTime = () => {
@@ -38,10 +49,16 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
   const renderLastMsg = () => {
     if (typeof lastMsg === undefined) return "Loading...";
     if (lastMsg) {
+      const truncatedText =
+        lastMsg?.text?.length > 20
+          ? `${lastMsg?.text.slice(0, 20)}...`
+          : lastMsg?.text;
       if (currentUser?.userId == lastMsg?.userId)
-        return `You: ${lastMsg?.text}`;
-      return lastMsg?.text;
-    } else return "Say Hi 👋";
+        return `You: ${truncatedText}`;
+      return truncatedText;
+    } else {
+      return "Say Hi 👋";
+    }
   };
 
   // Real-time listener for lastSeen updates
@@ -82,9 +99,10 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
     const msgRef = collection(docRef, "messages");
     const q = query(msgRef, orderBy("createdAT", "desc"));
     let unSub = onSnapshot(q, (snapshot) => {
-      let allMsg = snapshot.docs.map((doc) => {
-        return doc.data();
-      });
+      const allMsg = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setLastmsg(allMsg[0] ? allMsg[0] : null);
     });
     return () => {
@@ -143,12 +161,34 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
           </Text>
         </View>
         <View className="flex-row justify-between">
-          <Text
-            style={{ fontSize: hp(1.6) }}
-            className="font-medium text-neutral-500"
-          >
-            {renderLastMsg()}
-          </Text>
+          {lastMsg &&
+          !lastMsg.seen &&
+          lastMsg.userId !== currentUser?.userId ? (
+            <View
+              style={{ fontSize: hp(1.6) }}
+              className="flex-row items-center"
+            >
+              <View
+                style={{
+                  backgroundColor: "#000",
+                  width: hp(1),
+                  height: hp(1),
+                  borderRadius: 100,
+                  marginRight: 10,
+                }}
+              />
+              <Text style={{ fontSize: hp(1.6) }} className="font-bold">
+                {renderLastMsg()}
+              </Text>
+            </View>
+          ) : (
+            <Text
+              style={{ fontSize: hp(1.6) }}
+              className="font-medium text-neutral-500"
+            >
+              {renderLastMsg()}
+            </Text>
+          )}
           {lastSeen !== "Active Now" &&
           lastSeen !== "Not Available" &&
           lastSeen !== "" ? (

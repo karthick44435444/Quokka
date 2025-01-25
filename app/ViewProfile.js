@@ -13,8 +13,6 @@ import { LinearGradient } from "expo-linear-gradient";
 export default function ViewProfile() {
   const user = useLocalSearchParams();
 
-  console.log("user", user);
-
   return (
     <LinearGradient
       style={styles.container}

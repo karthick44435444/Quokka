@@ -108,7 +108,7 @@ export default function SignIn() {
               ) : (
                 <TouchableOpacity
                   onPress={handleLogin}
-                  style={{ height: hp(6.5), backgroundColor: "#800080" }}
+                  style={{ height: hp(6.5), backgroundColor: "#7c1bbf" }}
                   className="rounded-xl justify-center items-center"
                 >
                   <Text
@@ -129,7 +129,7 @@ export default function SignIn() {
               </Text>{" "}
               <Pressable onPress={() => router.push("SignUp")}>
                 <Text
-                  style={{ height: hp(2.5), color: "#800080" }}
+                  style={{ height: hp(2.5), color: "#7c1bbf" }}
                   className="font-bold text-neutral-500"
                 >
                   SignUp

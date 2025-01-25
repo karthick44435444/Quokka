@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F44336",
   },
   editButton: {
-    backgroundColor: "#800080",
+    backgroundColor: "#7c1bbf",
   },
   logoutButton: {
     backgroundColor: "gray",

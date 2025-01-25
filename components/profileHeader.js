@@ -16,7 +16,7 @@ export default function ProfileHeader({ title }) {
 
   return (
     <View
-      style={{ paddingTop: ios ? top : top + 10, backgroundColor: "#800080" }}
+      style={{ paddingTop: ios ? top : top + 10, backgroundColor: "#7c1bbf" }}
       className="flex-row items-center rounded-b-3xl px-5 pb-3 shadow"
     >
       <TouchableOpacity onPress={() => router.back()}>
