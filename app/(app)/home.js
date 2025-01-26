@@ -77,17 +77,6 @@ export default function Home() {
     }
   };
 
-  // const handleSaveUrl = async () => {
-  //   if (!newUrl.trim()) return;
-  //   try {
-  //     // Add code to save new URL if needed.
-  //     setNewUrl("");
-  //     setIsModalVisible(false);
-  //   } catch (error) {
-  //     console.error("Error saving video URL:", error);
-  //   }
-  // };
-
   const handleSaveUrl = async () => {
     if (!newUrl.trim()) return; // Check if URL is not empty
     try {
